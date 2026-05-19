@@ -1,0 +1,26 @@
+meta {
+  name: Criar consulta
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/consultas
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "petId": {{petId}},
+    "veterinarioId": {{veterinarioId}},
+    "dataHora": "2026-05-20T14:30:00",
+    "motivo": "Consulta de rotina",
+    "diagnostico": null,
+    "observacoes": "Tutor relatou boa alimentacao"
+  }
+}

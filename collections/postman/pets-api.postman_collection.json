@@ -1,0 +1,336 @@
+{
+  "info": {
+    "name": "Pets API",
+    "description": "Collection para testar a API de gerenciamento de pets.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "tutorId", "value": "1" },
+    { "key": "petId", "value": "1" },
+    { "key": "veterinarioId", "value": "1" },
+    { "key": "vacinaId", "value": "1" },
+    { "key": "consultaId", "value": "1" },
+    { "key": "historicoId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Tutores",
+      "item": [
+        {
+          "name": "Criar tutor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  pm.collectionVariables.set('tutorId', body.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Ana Souza\",\n  \"email\": \"ana@email.com\",\n  \"telefone\": \"11999999999\",\n  \"cpf\": \"12345678900\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/tutores"
+          }
+        },
+        { "name": "Listar tutores", "request": { "method": "GET", "url": "{{baseUrl}}/tutores" } },
+        { "name": "Buscar tutor por id", "request": { "method": "GET", "url": "{{baseUrl}}/tutores/{{tutorId}}" } },
+        {
+          "name": "Atualizar tutor",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Ana Souza Atualizada\",\n  \"email\": \"ana.atualizada@email.com\",\n  \"telefone\": \"11988887777\",\n  \"cpf\": \"12345678900\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/tutores/{{tutorId}}"
+          }
+        },
+        { "name": "Listar pets do tutor", "request": { "method": "GET", "url": "{{baseUrl}}/tutores/{{tutorId}}/pets" } },
+        { "name": "Excluir tutor", "request": { "method": "DELETE", "url": "{{baseUrl}}/tutores/{{tutorId}}" } }
+      ]
+    },
+    {
+      "name": "Pets",
+      "item": [
+        {
+          "name": "Criar pet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  pm.collectionVariables.set('petId', body.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Thor\",\n  \"especie\": \"Cachorro\",\n  \"raca\": \"Golden Retriever\",\n  \"idade\": 4,\n  \"peso\": 28.5,\n  \"sexo\": \"MACHO\",\n  \"castrado\": true,\n  \"tutorId\": {{tutorId}}\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/pets"
+          }
+        },
+        { "name": "Listar pets", "request": { "method": "GET", "url": "{{baseUrl}}/pets" } },
+        { "name": "Buscar pet por id", "request": { "method": "GET", "url": "{{baseUrl}}/pets/{{petId}}" } },
+        {
+          "name": "Atualizar pet",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Thor Atualizado\",\n  \"especie\": \"Cachorro\",\n  \"raca\": \"Golden Retriever\",\n  \"idade\": 5,\n  \"peso\": 30.0,\n  \"sexo\": \"MACHO\",\n  \"castrado\": true,\n  \"tutorId\": {{tutorId}}\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/pets/{{petId}}"
+          }
+        },
+        {
+          "name": "Atualizar pet parcialmente",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"peso\": 31.2,\n  \"castrado\": true\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/pets/{{petId}}"
+          }
+        },
+        { "name": "Listar pets por tutor", "request": { "method": "GET", "url": "{{baseUrl}}/pets/tutor/{{tutorId}}" } },
+        { "name": "Excluir pet", "request": { "method": "DELETE", "url": "{{baseUrl}}/pets/{{petId}}" } }
+      ]
+    },
+    {
+      "name": "Veterinarios",
+      "item": [
+        {
+          "name": "Criar veterinario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  pm.collectionVariables.set('veterinarioId', body.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Dra. Marina Lima\",\n  \"crmv\": \"CRMV-SP-12345\",\n  \"especialidade\": \"Clinica geral\",\n  \"telefone\": \"1133334444\",\n  \"email\": \"marina@clinica.com\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/veterinarios"
+          }
+        },
+        { "name": "Listar veterinarios", "request": { "method": "GET", "url": "{{baseUrl}}/veterinarios" } },
+        { "name": "Buscar veterinario por id", "request": { "method": "GET", "url": "{{baseUrl}}/veterinarios/{{veterinarioId}}" } },
+        {
+          "name": "Atualizar veterinario",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Dra. Marina Lima\",\n  \"crmv\": \"CRMV-SP-12345\",\n  \"especialidade\": \"Dermatologia\",\n  \"telefone\": \"1133335555\",\n  \"email\": \"marina@clinica.com\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/veterinarios/{{veterinarioId}}"
+          }
+        },
+        { "name": "Excluir veterinario", "request": { "method": "DELETE", "url": "{{baseUrl}}/veterinarios/{{veterinarioId}}" } }
+      ]
+    },
+    {
+      "name": "Vacinas",
+      "item": [
+        {
+          "name": "Criar vacina do pet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  pm.collectionVariables.set('vacinaId', body.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Raiva\",\n  \"dataAplicacao\": \"2026-05-19\",\n  \"dataProximaDose\": \"2027-05-19\",\n  \"veterinarioId\": {{veterinarioId}},\n  \"observacao\": \"Aplicacao anual\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/pets/{{petId}}/vacinas"
+          }
+        },
+        { "name": "Listar vacinas do pet", "request": { "method": "GET", "url": "{{baseUrl}}/pets/{{petId}}/vacinas" } },
+        { "name": "Buscar vacina por id", "request": { "method": "GET", "url": "{{baseUrl}}/vacinas/{{vacinaId}}" } },
+        {
+          "name": "Atualizar vacina",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Raiva\",\n  \"dataAplicacao\": \"2026-05-19\",\n  \"dataProximaDose\": \"2027-05-19\",\n  \"veterinarioId\": {{veterinarioId}},\n  \"observacao\": \"Aplicacao anual atualizada\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/vacinas/{{vacinaId}}"
+          }
+        },
+        { "name": "Excluir vacina", "request": { "method": "DELETE", "url": "{{baseUrl}}/vacinas/{{vacinaId}}" } }
+      ]
+    },
+    {
+      "name": "Consultas",
+      "item": [
+        {
+          "name": "Criar consulta",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  pm.collectionVariables.set('consultaId', body.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"petId\": {{petId}},\n  \"veterinarioId\": {{veterinarioId}},\n  \"dataHora\": \"2026-05-20T14:30:00\",\n  \"motivo\": \"Consulta de rotina\",\n  \"diagnostico\": null,\n  \"observacoes\": \"Tutor relatou boa alimentacao\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/consultas"
+          }
+        },
+        { "name": "Listar consultas", "request": { "method": "GET", "url": "{{baseUrl}}/consultas" } },
+        { "name": "Buscar consulta por id", "request": { "method": "GET", "url": "{{baseUrl}}/consultas/{{consultaId}}" } },
+        {
+          "name": "Atualizar consulta",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"petId\": {{petId}},\n  \"veterinarioId\": {{veterinarioId}},\n  \"dataHora\": \"2026-05-20T15:30:00\",\n  \"motivo\": \"Consulta de retorno\",\n  \"diagnostico\": \"Sem alteracoes\",\n  \"observacoes\": \"Retorno em 30 dias\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/consultas/{{consultaId}}"
+          }
+        },
+        {
+          "name": "Atualizar status da consulta",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"REALIZADA\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/consultas/{{consultaId}}/status"
+          }
+        },
+        { "name": "Listar consultas por pet", "request": { "method": "GET", "url": "{{baseUrl}}/consultas/pet/{{petId}}" } },
+        { "name": "Listar consultas por veterinario", "request": { "method": "GET", "url": "{{baseUrl}}/consultas/veterinario/{{veterinarioId}}" } },
+        { "name": "Excluir consulta", "request": { "method": "DELETE", "url": "{{baseUrl}}/consultas/{{consultaId}}" } }
+      ]
+    },
+    {
+      "name": "Historico Medico",
+      "item": [
+        {
+          "name": "Criar historico do pet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  pm.collectionVariables.set('historicoId', body.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"descricao\": \"Alergia a determinado medicamento\",\n  \"tipo\": \"ALERGIA\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/pets/{{petId}}/historico"
+          }
+        },
+        { "name": "Listar historico do pet", "request": { "method": "GET", "url": "{{baseUrl}}/pets/{{petId}}/historico" } },
+        { "name": "Buscar historico por id", "request": { "method": "GET", "url": "{{baseUrl}}/historico/{{historicoId}}" } },
+        {
+          "name": "Atualizar historico",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"descricao\": \"Alergia a medicamento atualizada\",\n  \"tipo\": \"ALERGIA\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/historico/{{historicoId}}"
+          }
+        },
+        { "name": "Excluir historico", "request": { "method": "DELETE", "url": "{{baseUrl}}/historico/{{historicoId}}" } }
+      ]
+    }
+  ]
+}

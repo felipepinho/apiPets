@@ -1,0 +1,24 @@
+meta {
+  name: Criar tutor
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/tutores
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "nome": "Ana Souza",
+    "email": "ana@email.com",
+    "telefone": "11999999999",
+    "cpf": "12345678900"
+  }
+}

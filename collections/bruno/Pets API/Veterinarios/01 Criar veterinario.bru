@@ -1,0 +1,25 @@
+meta {
+  name: Criar veterinario
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/veterinarios
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "nome": "Dra. Marina Lima",
+    "crmv": "CRMV-SP-12345",
+    "especialidade": "Clinica geral",
+    "telefone": "1133334444",
+    "email": "marina@clinica.com"
+  }
+}

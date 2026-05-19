@@ -1,0 +1,26 @@
+meta {
+  name: Atualizar consulta
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/consultas/{{consultaId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "petId": {{petId}},
+    "veterinarioId": {{veterinarioId}},
+    "dataHora": "2026-05-20T15:30:00",
+    "motivo": "Consulta de retorno",
+    "diagnostico": "Sem alteracoes",
+    "observacoes": "Retorno em 30 dias"
+  }
+}

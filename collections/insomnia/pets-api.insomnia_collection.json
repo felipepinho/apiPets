@@ -1,0 +1,209 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-05-19T00:00:00.000Z",
+  "__export_source": "apiPets",
+  "resources": [
+    {
+      "_id": "wrk_pets_api",
+      "_type": "workspace",
+      "name": "Pets API",
+      "description": "Collection para testar a API de gerenciamento de pets.",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_local",
+      "_type": "environment",
+      "parentId": "wrk_pets_api",
+      "name": "Local",
+      "data": {
+        "base_url": "http://localhost:8080",
+        "tutor_id": "1",
+        "pet_id": "1",
+        "veterinario_id": "1",
+        "vacina_id": "1",
+        "consulta_id": "1",
+        "historico_id": "1"
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url", "tutor_id", "pet_id", "veterinario_id", "vacina_id", "consulta_id", "historico_id"]
+      },
+      "color": null,
+      "isPrivate": false
+    },
+    { "_id": "fld_tutores", "_type": "request_group", "parentId": "wrk_pets_api", "name": "Tutores" },
+    { "_id": "fld_pets", "_type": "request_group", "parentId": "wrk_pets_api", "name": "Pets" },
+    { "_id": "fld_veterinarios", "_type": "request_group", "parentId": "wrk_pets_api", "name": "Veterinarios" },
+    { "_id": "fld_vacinas", "_type": "request_group", "parentId": "wrk_pets_api", "name": "Vacinas" },
+    { "_id": "fld_consultas", "_type": "request_group", "parentId": "wrk_pets_api", "name": "Consultas" },
+    { "_id": "fld_historico", "_type": "request_group", "parentId": "wrk_pets_api", "name": "Historico Medico" },
+
+    {
+      "_id": "req_tutores_criar",
+      "_type": "request",
+      "parentId": "fld_tutores",
+      "name": "Criar tutor",
+      "method": "POST",
+      "url": "{{ _.base_url }}/tutores",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"nome\": \"Ana Souza\",\n  \"email\": \"ana@email.com\",\n  \"telefone\": \"11999999999\",\n  \"cpf\": \"12345678900\"\n}" }
+    },
+    { "_id": "req_tutores_listar", "_type": "request", "parentId": "fld_tutores", "name": "Listar tutores", "method": "GET", "url": "{{ _.base_url }}/tutores" },
+    { "_id": "req_tutores_buscar", "_type": "request", "parentId": "fld_tutores", "name": "Buscar tutor por id", "method": "GET", "url": "{{ _.base_url }}/tutores/{{ _.tutor_id }}" },
+    {
+      "_id": "req_tutores_atualizar",
+      "_type": "request",
+      "parentId": "fld_tutores",
+      "name": "Atualizar tutor",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/tutores/{{ _.tutor_id }}",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"nome\": \"Ana Souza Atualizada\",\n  \"email\": \"ana.atualizada@email.com\",\n  \"telefone\": \"11988887777\",\n  \"cpf\": \"12345678900\"\n}" }
+    },
+    { "_id": "req_tutores_pets", "_type": "request", "parentId": "fld_tutores", "name": "Listar pets do tutor", "method": "GET", "url": "{{ _.base_url }}/tutores/{{ _.tutor_id }}/pets" },
+    { "_id": "req_tutores_excluir", "_type": "request", "parentId": "fld_tutores", "name": "Excluir tutor", "method": "DELETE", "url": "{{ _.base_url }}/tutores/{{ _.tutor_id }}" },
+
+    {
+      "_id": "req_pets_criar",
+      "_type": "request",
+      "parentId": "fld_pets",
+      "name": "Criar pet",
+      "method": "POST",
+      "url": "{{ _.base_url }}/pets",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"nome\": \"Thor\",\n  \"especie\": \"Cachorro\",\n  \"raca\": \"Golden Retriever\",\n  \"idade\": 4,\n  \"peso\": 28.5,\n  \"sexo\": \"MACHO\",\n  \"castrado\": true,\n  \"tutorId\": {{ _.tutor_id }}\n}" }
+    },
+    { "_id": "req_pets_listar", "_type": "request", "parentId": "fld_pets", "name": "Listar pets", "method": "GET", "url": "{{ _.base_url }}/pets" },
+    { "_id": "req_pets_buscar", "_type": "request", "parentId": "fld_pets", "name": "Buscar pet por id", "method": "GET", "url": "{{ _.base_url }}/pets/{{ _.pet_id }}" },
+    {
+      "_id": "req_pets_atualizar",
+      "_type": "request",
+      "parentId": "fld_pets",
+      "name": "Atualizar pet",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/pets/{{ _.pet_id }}",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"nome\": \"Thor Atualizado\",\n  \"especie\": \"Cachorro\",\n  \"raca\": \"Golden Retriever\",\n  \"idade\": 5,\n  \"peso\": 30.0,\n  \"sexo\": \"MACHO\",\n  \"castrado\": true,\n  \"tutorId\": {{ _.tutor_id }}\n}" }
+    },
+    {
+      "_id": "req_pets_patch",
+      "_type": "request",
+      "parentId": "fld_pets",
+      "name": "Atualizar pet parcialmente",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/pets/{{ _.pet_id }}",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"peso\": 31.2,\n  \"castrado\": true\n}" }
+    },
+    { "_id": "req_pets_por_tutor", "_type": "request", "parentId": "fld_pets", "name": "Listar pets por tutor", "method": "GET", "url": "{{ _.base_url }}/pets/tutor/{{ _.tutor_id }}" },
+    { "_id": "req_pets_excluir", "_type": "request", "parentId": "fld_pets", "name": "Excluir pet", "method": "DELETE", "url": "{{ _.base_url }}/pets/{{ _.pet_id }}" },
+
+    {
+      "_id": "req_veterinarios_criar",
+      "_type": "request",
+      "parentId": "fld_veterinarios",
+      "name": "Criar veterinario",
+      "method": "POST",
+      "url": "{{ _.base_url }}/veterinarios",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"nome\": \"Dra. Marina Lima\",\n  \"crmv\": \"CRMV-SP-12345\",\n  \"especialidade\": \"Clinica geral\",\n  \"telefone\": \"1133334444\",\n  \"email\": \"marina@clinica.com\"\n}" }
+    },
+    { "_id": "req_veterinarios_listar", "_type": "request", "parentId": "fld_veterinarios", "name": "Listar veterinarios", "method": "GET", "url": "{{ _.base_url }}/veterinarios" },
+    { "_id": "req_veterinarios_buscar", "_type": "request", "parentId": "fld_veterinarios", "name": "Buscar veterinario por id", "method": "GET", "url": "{{ _.base_url }}/veterinarios/{{ _.veterinario_id }}" },
+    {
+      "_id": "req_veterinarios_atualizar",
+      "_type": "request",
+      "parentId": "fld_veterinarios",
+      "name": "Atualizar veterinario",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/veterinarios/{{ _.veterinario_id }}",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"nome\": \"Dra. Marina Lima\",\n  \"crmv\": \"CRMV-SP-12345\",\n  \"especialidade\": \"Dermatologia\",\n  \"telefone\": \"1133335555\",\n  \"email\": \"marina@clinica.com\"\n}" }
+    },
+    { "_id": "req_veterinarios_excluir", "_type": "request", "parentId": "fld_veterinarios", "name": "Excluir veterinario", "method": "DELETE", "url": "{{ _.base_url }}/veterinarios/{{ _.veterinario_id }}" },
+
+    {
+      "_id": "req_vacinas_criar",
+      "_type": "request",
+      "parentId": "fld_vacinas",
+      "name": "Criar vacina do pet",
+      "method": "POST",
+      "url": "{{ _.base_url }}/pets/{{ _.pet_id }}/vacinas",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"nome\": \"Raiva\",\n  \"dataAplicacao\": \"2026-05-19\",\n  \"dataProximaDose\": \"2027-05-19\",\n  \"veterinarioId\": {{ _.veterinario_id }},\n  \"observacao\": \"Aplicacao anual\"\n}" }
+    },
+    { "_id": "req_vacinas_por_pet", "_type": "request", "parentId": "fld_vacinas", "name": "Listar vacinas do pet", "method": "GET", "url": "{{ _.base_url }}/pets/{{ _.pet_id }}/vacinas" },
+    { "_id": "req_vacinas_buscar", "_type": "request", "parentId": "fld_vacinas", "name": "Buscar vacina por id", "method": "GET", "url": "{{ _.base_url }}/vacinas/{{ _.vacina_id }}" },
+    {
+      "_id": "req_vacinas_atualizar",
+      "_type": "request",
+      "parentId": "fld_vacinas",
+      "name": "Atualizar vacina",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/vacinas/{{ _.vacina_id }}",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"nome\": \"Raiva\",\n  \"dataAplicacao\": \"2026-05-19\",\n  \"dataProximaDose\": \"2027-05-19\",\n  \"veterinarioId\": {{ _.veterinario_id }},\n  \"observacao\": \"Aplicacao anual atualizada\"\n}" }
+    },
+    { "_id": "req_vacinas_excluir", "_type": "request", "parentId": "fld_vacinas", "name": "Excluir vacina", "method": "DELETE", "url": "{{ _.base_url }}/vacinas/{{ _.vacina_id }}" },
+
+    {
+      "_id": "req_consultas_criar",
+      "_type": "request",
+      "parentId": "fld_consultas",
+      "name": "Criar consulta",
+      "method": "POST",
+      "url": "{{ _.base_url }}/consultas",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"petId\": {{ _.pet_id }},\n  \"veterinarioId\": {{ _.veterinario_id }},\n  \"dataHora\": \"2026-05-20T14:30:00\",\n  \"motivo\": \"Consulta de rotina\",\n  \"diagnostico\": null,\n  \"observacoes\": \"Tutor relatou boa alimentacao\"\n}" }
+    },
+    { "_id": "req_consultas_listar", "_type": "request", "parentId": "fld_consultas", "name": "Listar consultas", "method": "GET", "url": "{{ _.base_url }}/consultas" },
+    { "_id": "req_consultas_buscar", "_type": "request", "parentId": "fld_consultas", "name": "Buscar consulta por id", "method": "GET", "url": "{{ _.base_url }}/consultas/{{ _.consulta_id }}" },
+    {
+      "_id": "req_consultas_atualizar",
+      "_type": "request",
+      "parentId": "fld_consultas",
+      "name": "Atualizar consulta",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/consultas/{{ _.consulta_id }}",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"petId\": {{ _.pet_id }},\n  \"veterinarioId\": {{ _.veterinario_id }},\n  \"dataHora\": \"2026-05-20T15:30:00\",\n  \"motivo\": \"Consulta de retorno\",\n  \"diagnostico\": \"Sem alteracoes\",\n  \"observacoes\": \"Retorno em 30 dias\"\n}" }
+    },
+    {
+      "_id": "req_consultas_status",
+      "_type": "request",
+      "parentId": "fld_consultas",
+      "name": "Atualizar status da consulta",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/consultas/{{ _.consulta_id }}/status",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"status\": \"REALIZADA\"\n}" }
+    },
+    { "_id": "req_consultas_por_pet", "_type": "request", "parentId": "fld_consultas", "name": "Listar consultas por pet", "method": "GET", "url": "{{ _.base_url }}/consultas/pet/{{ _.pet_id }}" },
+    { "_id": "req_consultas_por_veterinario", "_type": "request", "parentId": "fld_consultas", "name": "Listar consultas por veterinario", "method": "GET", "url": "{{ _.base_url }}/consultas/veterinario/{{ _.veterinario_id }}" },
+    { "_id": "req_consultas_excluir", "_type": "request", "parentId": "fld_consultas", "name": "Excluir consulta", "method": "DELETE", "url": "{{ _.base_url }}/consultas/{{ _.consulta_id }}" },
+
+    {
+      "_id": "req_historico_criar",
+      "_type": "request",
+      "parentId": "fld_historico",
+      "name": "Criar historico do pet",
+      "method": "POST",
+      "url": "{{ _.base_url }}/pets/{{ _.pet_id }}/historico",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"descricao\": \"Alergia a determinado medicamento\",\n  \"tipo\": \"ALERGIA\"\n}" }
+    },
+    { "_id": "req_historico_por_pet", "_type": "request", "parentId": "fld_historico", "name": "Listar historico do pet", "method": "GET", "url": "{{ _.base_url }}/pets/{{ _.pet_id }}/historico" },
+    { "_id": "req_historico_buscar", "_type": "request", "parentId": "fld_historico", "name": "Buscar historico por id", "method": "GET", "url": "{{ _.base_url }}/historico/{{ _.historico_id }}" },
+    {
+      "_id": "req_historico_atualizar",
+      "_type": "request",
+      "parentId": "fld_historico",
+      "name": "Atualizar historico",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/historico/{{ _.historico_id }}",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": { "mimeType": "application/json", "text": "{\n  \"descricao\": \"Alergia a medicamento atualizada\",\n  \"tipo\": \"ALERGIA\"\n}" }
+    },
+    { "_id": "req_historico_excluir", "_type": "request", "parentId": "fld_historico", "name": "Excluir historico", "method": "DELETE", "url": "{{ _.base_url }}/historico/{{ _.historico_id }}" }
+  ]
+}
