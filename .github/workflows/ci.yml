@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  testes:
+    name: Testes automatizados
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    env:
+      SPRING_PROFILES_ACTIVE: test
+
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Permitir execucao do Maven Wrapper
+        run: chmod +x mvnw
+
+      - name: Rodar testes
+        run: ./mvnw test
