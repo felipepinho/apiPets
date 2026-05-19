@@ -53,7 +53,20 @@ No Linux/macOS:
 
 Se a mudanca afetar banco de dados, crie uma migration Flyway em `src/main/resources/db/migration`.
 
-## 5. Enviar a branch
+## 5. Revisar o README
+
+Antes de abrir um PR, revise o `README.md` e confirme se ele continua correto para a mudanca feita.
+
+Atualize o README quando houver:
+
+- novo endpoint;
+- mudanca de payload;
+- mudanca em comandos de execucao ou testes;
+- mudanca no Docker Compose ou banco local;
+- nova collection ou ajuste no Swagger;
+- qualquer instrucao que possa ficar desatualizada para quem clonar o projeto.
+
+## 6. Enviar a branch
 
 ```bash
 git add .
@@ -61,7 +74,7 @@ git commit -m "Mensagem curta e clara"
 git push -u origin nome-da-branch
 ```
 
-## 6. Abrir o PR
+## 7. Abrir o PR
 
 Abra o PR para `main` e preencha o template:
 
@@ -70,7 +83,7 @@ Abra o PR para `main` e preencha o template:
 - checklist de validacao;
 - evidencias quando houver comportamento visual, payloads ou respostas importantes.
 
-## 7. Regras de qualidade do PR
+## 8. Regras de qualidade do PR
 
 Antes de pedir review, confira:
 
@@ -84,7 +97,7 @@ Antes de pedir review, confira:
 - testes cobrem o comportamento principal;
 - nenhum arquivo local ou sensivel foi versionado.
 
-## 8. Depois do merge
+## 9. Depois do merge
 
 ```bash
 git switch main
