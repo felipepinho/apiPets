@@ -1,0 +1,25 @@
+meta {
+  name: Atualizar veterinario
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/veterinarios/{{veterinarioId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "nome": "Dra. Marina Lima",
+    "crmv": "CRMV-SP-12345",
+    "especialidade": "Dermatologia",
+    "telefone": "1133335555",
+    "email": "marina@clinica.com"
+  }
+}

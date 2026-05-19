@@ -1,0 +1,21 @@
+meta {
+  name: Atualizar status da consulta
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{baseUrl}}/consultas/{{consultaId}}/status
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "status": "REALIZADA"
+  }
+}

@@ -1,0 +1,22 @@
+meta {
+  name: Atualizar pet parcialmente
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{baseUrl}}/pets/{{petId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "peso": 31.2,
+    "castrado": true
+  }
+}
