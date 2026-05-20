@@ -239,15 +239,42 @@ Os erros seguem o formato:
 ## Estrutura do Projeto
 
 ```text
-src/main/java/br/com/apiPets
-├── config
-├── controller
-├── dto
-├── entity
-├── exception
-├── mapper
-├── repository
-└── service
+.
+|-- .github
+|   |-- pull_request_template.md
+|   `-- workflows
+|       `-- ci.yml
+|-- collections
+|   |-- bruno
+|   |-- insomnia
+|   `-- postman
+|-- src
+|   |-- main
+|   |   |-- java/br/com/apiPets
+|   |   |   |-- config
+|   |   |   |-- controller
+|   |   |   |-- dto
+|   |   |   |-- entity
+|   |   |   |-- exception
+|   |   |   |-- mapper
+|   |   |   |-- repository
+|   |   |   |-- service
+|   |   |   `-- ApiPetsApplication.java
+|   |   `-- resources
+|   |       |-- db/migration
+|   |       |-- application.properties
+|   |       `-- application-dev.properties
+|   `-- test
+|       |-- java/br/com/apiPets
+|       |   |-- controller
+|       |   |-- service
+|       |   `-- ApiPetsApplicationTests.java
+|       `-- resources
+|           `-- application-test.properties
+|-- docker-compose.yml
+|-- pom.xml
+|-- README.md
+`-- CONTRIBUTING.md
 ```
 
 ## Boas Práticas Aplicadas
